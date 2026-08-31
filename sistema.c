@@ -23,7 +23,7 @@ void cadastrarContatos(contatos *p, int quantidade){
     }
 }
 
-int buscarContato(contatos *p, int quantidade) //FALTA FAZER
+int buscarContato(contatos *p, int quantidade){} //FALTA FAZER
 
 void listarContatos(contatos *p, int quantidade){
 
