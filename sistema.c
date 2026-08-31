@@ -48,8 +48,19 @@ int buscarContatos(contatos *p, int quantidade, int totalcadastrado, char *nomeb
 
 }
 
+void removerContatos(contatos *p, int quantidade ,int totalcadastrado, int indiceremover){
+
+    for(int i = indiceremover; i < totalcadastrado; i++){
+        p[i] = p[i+1];
+    }
+
+    printf("Contato removido");
+   
+}
+
+
 int main() {
-   int opcao, quantidade, totalcadastrado = 0, indicebusca = 0;
+   int opcao, quantidade, totalcadastrado = 0, indicebusca = 0, indiceremover = 0;
    contatos *p  = malloc(sizeof(contatos));
    char nomebusca[50];
 
@@ -83,10 +94,30 @@ int main() {
         }
         break;
 
+    case 3:
+        printf("\n---REMOVER CONTATOS---\n");
+
+        printf("Insira o nome do contato que deseja remover: ");
+        scanf("%49s", nomebusca);
+
+        indiceremover = buscarContatos(p, quantidade, totalcadastrado, nomebusca);
+
+        removerContatos(p, quantidade , totalcadastrado, indiceremover);
+
+        totalcadastrado--;
+
+        break;
+
+
+
+
     case 4:
         printf("\n---LISTAR DE CONTATOS---\n");
         listarContatos(p, totalcadastrado);
         break;
+
+    case 5:
+        printf("\nSaindo do programa...\n");
 
    }
 
