@@ -8,18 +8,20 @@ typedef struct {
 } contatos;
 
 void menu(){
+    printf("\n---MENU---\n");
     printf("Escolha uma opção:\n");
     printf("1)Cadastrar contatos\n2)Buscar contatos\n3)Remover contatos\n4)Listar contatos\n5)Sair");
 
 }
 
-void cadastrarContatos(contatos *p, int quantidade){
+void cadastrarContatos(contatos *p, int quantidade, int inicio){
 
    for (int i = 0; i < quantidade; i++){
     printf("Insira o nome do contato [%d]: ", i + 1);
     scanf("%s", p[i].nome);
     printf("Insira o telefone do contato [%d]: ", i + 1);
     scanf("%d", &p[i].telefone);
+    inicio++; 
     }
 }
 
@@ -35,7 +37,7 @@ void listarContatos(contatos *p, int quantidade){
 
 
 int main() {
-   int opcao, quantidade;
+   int opcao, quantidade, inicio = 0;
    contatos *p  = malloc(sizeof(contatos));
 
   do{
@@ -49,7 +51,7 @@ int main() {
         printf("Insira quantos contatos deseja cadastrar: ");
         scanf("%d", &quantidade);
 
-        cadastrarContatos(p, quantidade);
+        cadastrarContatos(p, quantidade, inicio);
         break;
 
     case 4:
