@@ -7,6 +7,7 @@ typedef struct {
     int telefone;
 } contatos;
 
+
 void menu(){
     printf("\n---MENU---\n");
     printf("Escolha uma opção:\n");
@@ -14,22 +15,25 @@ void menu(){
 
 }
 
-void cadastrarContatos(contatos *p, int quantidade, int inicio){
+void cadastrarContatos(contatos *p, int quantidade, int totalcadastrado){
 
-   for (int i = 0; i < quantidade; i++){
+        //iniciando o loop a partir do total de contatos já cadastrados
+        //totalcadastrado + quantidade é o total de contatos que serão cadastrados
+
+
+   for (int i = totalcadastrado; i < totalcadastrado + quantidade; i++){ 
     printf("Insira o nome do contato [%d]: ", i + 1);
-    scanf("%s", p[i].nome);
+    scanf("%49s", p[i].nome);
     printf("Insira o telefone do contato [%d]: ", i + 1);
     scanf("%d", &p[i].telefone);
-    inicio++; 
+    
     }
 }
 
-int buscarContato(contatos *p, int quantidade){} //FALTA FAZER
 
-void listarContatos(contatos *p, int quantidade){
+void listarContatos(contatos *p, int totalcadastrado){
 
-     for (int i = 0; i < quantidade; i++){
+     for (int i = 0; i < totalcadastrado; i++){
         printf("nome [%d]: %s ,telefone [%d]: %d\n", i + 1, p[i].nome, i + 1, p[i].telefone);
     }
 }
@@ -37,7 +41,7 @@ void listarContatos(contatos *p, int quantidade){
 
 
 int main() {
-   int opcao, quantidade, inicio = 0;
+   int opcao, quantidade, totalcadastrado = 0;
    contatos *p  = malloc(sizeof(contatos));
 
   do{
@@ -51,12 +55,15 @@ int main() {
         printf("Insira quantos contatos deseja cadastrar: ");
         scanf("%d", &quantidade);
 
-        cadastrarContatos(p, quantidade, inicio);
+        p = realloc(p, (totalcadastrado + quantidade) * sizeof(contatos)); //realocando memória para o vetor de contatos
+
+        cadastrarContatos(p, quantidade,totalcadastrado);
+        totalcadastrado += quantidade; //atualizando o total de contatos cadastrados
         break;
 
     case 4:
         printf("\n---LISTAR DE CONTATOS---\n");
-        listarContatos(p, quantidade);
+        listarContatos(p, totalcadastrado);
         break;
 
    }
