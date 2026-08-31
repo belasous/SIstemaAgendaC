@@ -123,5 +123,8 @@ int main() {
 
  }while(opcao != 5);
 
+
+ free(p);
+
     return 0;
 }
